@@ -1,0 +1,127 @@
+a{
+    text-decoration:none;
+    text-transform:capitalize;
+    color:#9D6C1B;
+    font-size:.8rem;
+  }
+  a:hover,a:focus {
+    color:#DB9314;
+  }
+  .container{
+    margin:0;
+    padding:0;
+    width: 600px;
+  }
+  .radiobtn{
+      color: black;
+      text-align: left;
+  }
+  .calculator-form{
+    width:80%;
+    background:#ffffff;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:1rem;
+    padding:3rem;
+    box-shadow:2px 7px 8px rgba(0,0,0,.3);
+    border-radius:3px;
+    color:#373636;
+    text-align:center;
+  }
+  .title{
+    font-weight: bold;
+    color: black;
+    margin-bottom:1rem;
+  }
+  .input-field {
+    width:100%;
+    padding:0;
+    margin:0;
+  }
+  .input-field input {
+    width:100%;
+    background:transparent;
+    border:none;
+    outline:none;
+    color: #000000;
+    border-bottom:1px solid #7c0000;
+    padding:.6rem;
+  }
+  .input-field input:focus {
+    border-color: #7c0000;
+  }
+  
+  .input {
+    display:flex;
+    justify-content:space-between;
+    font-size:.9rem;
+  }
+  input[type="checkbox"]{
+    background:transparent;
+    padding:1rem;
+  }
+  .terms {
+    font-size:.7rem;
+    margin-top:1rem;
+    padding: 0 3rem;
+  }
+  .terms strong{
+    text-decoration:underline;
+    cursor:pointer;
+  }
+  .btn {
+    color:white;
+    padding:.7rem;
+    border:none;
+    border-radius:3px;
+    font-size:1rem;
+    font-weight:bold;
+    outline:none;
+    cursor:pointer;
+    text-transform:capitalize;
+    transition:.2s ease-in-out;
+    filter:brightness(1);
+  }
+  .calculate {
+    background:#ec1c1c;
+  }
+  .create{
+    width:100%;
+    font-weight:normal;
+  }
+  .btn:hover {
+    filter: brightness(.8);
+    box-shadow: 2px 5px 8px rgba(0,0,0,.2);
+  /*   color:#ccc; */
+  }
+ 
+  
+  @media screen and (max-width:300px){
+    .calculate-form{
+      width:calc(3% - 1rem);
+      margin:1rem;
+    }
+    .terms{
+      padding:0;
+    }
+  }
+  @media screen and (max-width:300px){
+    .login-form{
+      width:calc(3% - 1rem);
+      margin:1rem;
+    }
+    .terms{
+      padding:0;
+    }
+  }
+
+  body {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:98vh;
+    font-family:sans-serif;
+    background:#FAF2EA;
+    background-image: linear-gradient(to bottom right, rgb(214, 188, 188), rgb(170, 12, 12));
+  }
