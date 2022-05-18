@@ -1,5 +1,10 @@
 package com.lti.homeloanapplication.service;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.lti.homeloanapplication.entity.LoanInfo;
@@ -7,10 +12,31 @@ import com.lti.homeloanapplication.entity.LoanInfo;
 @Service
 public class EMICalculatorServiceImpl implements EMICalculatorService {
 
+	@Autowired
+    private JdbcTemplate jdbcTemplate;
+	
+	
+	
+	
 	@Override
 	public LoanInfo calculateInterestRate(LoanInfo loanInfo) {
+		
+		
+		String query =" select * from public.\"InterestRates\"";
+		List<Map<String, Object>> list=jdbcTemplate.queryForList(query);
+		
+		for (Map<String, Object> map : list) {
+		    for (Map.Entry<String, Object> entry : map.entrySet()) {
+		        String key = entry.getKey();
+		        Object value = entry.getValue();
+		        System.out.println(key+value);
+		    }
+		    
+		    System.out.println("****************");
+		}
 
 
+		 
 		
 			System.out.println("Inside Service layer");
 			
