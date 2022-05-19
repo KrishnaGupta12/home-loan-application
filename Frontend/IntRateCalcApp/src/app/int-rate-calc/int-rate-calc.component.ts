@@ -9,15 +9,13 @@ import { LoanInfo } from '../loan-info';
 })
 export class IntRateCalcComponent implements OnInit {
 
+  info:any;
   constructor(private service:IRCService ) { }
   
 
   ngOnInit(): void {
-    this.info.salariedOrSelfEmployed=true;
     }
 
-   
-    info:any;
     flag=false;
   
 
