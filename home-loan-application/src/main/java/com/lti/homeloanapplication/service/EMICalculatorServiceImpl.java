@@ -22,17 +22,33 @@ public class EMICalculatorServiceImpl implements EMICalculatorService {
 	public LoanInfo calculateInterestRate(LoanInfo loanInfo) {
 		
 		
-		String query =" select * from public.\"InterestRates\"";
+		String query =" select * from public.\"InterestRates\" ";
 		List<Map<String, Object>> list=jdbcTemplate.queryForList(query);
 		
+		int creditScore=loanInfo.getCreditScore();
+		
 		for (Map<String, Object> map : list) {
-		    for (Map.Entry<String, Object> entry : map.entrySet()) {
-		        String key = entry.getKey();
-		        Object value = entry.getValue();
-		        System.out.println(key+value);
-		    }
-		    
-		    System.out.println("****************");
+		  	int credit_min= map.get("Credit_Min");
+			int credit_max= map.get("Credit_Max");
+			
+			if(creditScore > credit_min  && creditScore < credit_max)
+			{
+				if(loanInfo.getSalariedOrSelfEmployed())
+				{
+					loanInfo.setInterestRate(map.get(InterestRateForSalaried);
+					
+				}
+				else
+				{
+					loanInfo.setInterestRate(map.get(InterestRateForSelfEmployed);
+				}
+									 
+									 
+								 
+				
+			}
+				
+			
 		}
 
 
