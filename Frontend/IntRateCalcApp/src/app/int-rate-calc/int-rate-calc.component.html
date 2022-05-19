@@ -30,8 +30,12 @@
 
           <h4>Salaried?</h4>
           <div class="input-field">
-            <input type="radio" name="food" [(ngModel)]="info.salariedOrSelfEmployed" [value]="true">Yes
-            <input type="radio" name="food" [(ngModel)]="info.salariedOrSelfEmployed" [value]="false">No
+            <label class="radio-inline">
+            <input type="radio" name="food" [(ngModel)]="info.salariedOrSelfEmployed" [value]="true" ngModel>Yes
+            </label>
+            <label class="radio-inline">
+            <input type="radio" name="food" [(ngModel)]="info.salariedOrSelfEmployed" [value]="false" ngModel>No
+            </label>
           </div>
           <br>
           <button [disabled]="!IRCForm.valid" class="btn calculate">Calculate</button>
