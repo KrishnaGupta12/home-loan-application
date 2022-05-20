@@ -15,6 +15,9 @@ a{
   .radiobtn{
       color: black;
       text-align: left;
+      float: left;
+      clear: none;
+
   }
   .calculator-form{
     width:80%;
@@ -51,6 +54,10 @@ a{
   .input-field input:focus {
     border-color: #7c0000;
   }
+  .output{
+    float: left;
+    text-align: left;
+  }
   
   .input {
     display:flex;
@@ -82,9 +89,12 @@ a{
     text-transform:capitalize;
     transition:.2s ease-in-out;
     filter:brightness(1);
+    align-items: center;  
+    justify-content: center; 
   }
   .calculate {
     background:#ec1c1c;
+    float: right;
   }
   .create{
     width:100%;
@@ -114,6 +124,12 @@ a{
     .terms{
       padding:0;
     }
+  }
+  label {
+    float: left;
+    clear: none;
+    display: block;
+    padding: 0px 1em 0px 8px;
   }
 
   body {

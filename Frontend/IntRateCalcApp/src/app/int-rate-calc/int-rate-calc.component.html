@@ -15,8 +15,9 @@
     
         <div class="input-field">
           <label for="tenureInYears"></label> 
-         <h4>Tenure:<input type="number" placeholder="in years" class="form-control" name="tenureInYears" ngModel required [range]="[10, 20]" ></h4> 
-        </div>
+         <h4>Tenure:<input type="number" placeholder="in years" class="form-control" name="tenureInYears" ngModel required></h4> 
+  
+      </div>
      
 
 
@@ -28,24 +29,39 @@
           
           
 
-          <h4>Salaried?</h4>
+          
           <div class="input-field">
+            <label>
+              <h4>Salaried?</h4>
+            </label>
+           <br>
             <label class="radio-inline">
-            <input type="radio" name="food" [(ngModel)]="bool" [value]="true" ngModel>Yes
+            <input type="radio" name="food" [(ngModel)]="bool" [value]="true" ngModel> Yes
             </label>
             <label class="radio-inline">
-            <input type="radio" name="food" [(ngModel)]="bool" [value]="false" ngModel>No
+            <input type="radio" name="food" [(ngModel)]="bool" [value]="false" ngModel> No
             </label>
           </div>
-          <br>
+          <br><br>
           <button [disabled]="!IRCForm.valid" class="btn calculate">Calculate</button>
         
         </form>
       
 
-        <div *ngIf="flag">
-            <h3>Interest Rate: {{info.interestRate}} %</h3>
-            <h3>EMI: {{info.emi}} Rs</h3>
+        <div class="output" *ngIf="flag">
+          <table>
+            <tr>
+              <td><h3>Interest Rate:</h3></td>
+              <td><h3>{{info.interestRate}} %</h3></td>
+             
+          </tr>
+
+          <tr>
+            <td><h3>EMI:</h3></td>
+            <td><h3>{{info.emi}} Rs</h3></td>
+             
+          </tr>
+          </table>
         </div>
       </div>
     </div>

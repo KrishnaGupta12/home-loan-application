@@ -19,6 +19,7 @@ export class IntRateCalcComponent implements OnInit {
 
     bool =true;
 
+
     flag=false;
 
 
