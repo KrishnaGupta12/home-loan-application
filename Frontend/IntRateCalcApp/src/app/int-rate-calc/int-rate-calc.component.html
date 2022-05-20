@@ -15,7 +15,7 @@
     
         <div class="input-field">
           <label for="tenureInYears"></label> 
-         <h4>Tenure:<input type="number" placeholder="in years" class="form-control" name="tenureInYears" ngModel required></h4> 
+         <h4>Tenure:<input type="number" placeholder="in years" class="form-control" name="tenureInYears" ngModel required [range]="[10, 20]" ></h4> 
         </div>
      
 
@@ -31,10 +31,10 @@
           <h4>Salaried?</h4>
           <div class="input-field">
             <label class="radio-inline">
-            <input type="radio" name="food" [(ngModel)]="info.salariedOrSelfEmployed" [value]="true" ngModel>Yes
+            <input type="radio" name="food" [(ngModel)]="bool" [value]="true" ngModel>Yes
             </label>
             <label class="radio-inline">
-            <input type="radio" name="food" [(ngModel)]="info.salariedOrSelfEmployed" [value]="false" ngModel>No
+            <input type="radio" name="food" [(ngModel)]="bool" [value]="false" ngModel>No
             </label>
           </div>
           <br>
@@ -46,9 +46,6 @@
         <div *ngIf="flag">
             <h3>Interest Rate: {{info.interestRate}} %</h3>
             <h3>EMI: {{info.emi}} Rs</h3>
-            {{info.salariedOrSelfEmployed}}
-        
-            
         </div>
       </div>
     </div>

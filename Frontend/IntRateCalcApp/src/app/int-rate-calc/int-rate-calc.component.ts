@@ -14,28 +14,20 @@ export class IntRateCalcComponent implements OnInit {
   
 
   ngOnInit(): void {
+    
     }
+
+    bool =true;
 
     flag=false;
-  
 
-    toggleToTrue()
-    {
-      this.info.salariedOrSelfEmployed=true;
-
-    }
-
-    toggleToFalse()
-    {
-      this.info.salariedOrSelfEmployed=false;
-
-    }
 
     calculate(loanInfo:any)
     {
       
       this.info=loanInfo.value;
-      this.info.salariedOrSelfEmployed=true;
+
+      this.info.salariedOrSelfEmployed=this.bool;
      //console.log(this.info.creditScore);
 
 
@@ -48,13 +40,8 @@ export class IntRateCalcComponent implements OnInit {
         (error)=>{
           console.log("Error **********************************")
           console.log(error);
-        }
-        
-        
+        }        
       )
-
-
-
     }
 
 }
