@@ -1,0 +1,156 @@
+package com.lti.HomeLoanApplication.Entity;
+
+
+
+
+import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+@Entity
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
+
+@Table(name="customer")
+public class Customer {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	@NotNull
+	@NotNull(message="First Name should not be null")
+	private String first_name;
+	
+	@NotNull
+	@NotBlank(message="Last Name should not be null")
+	private String last_name;
+	
+	@NotNull
+	@NotBlank(message="Mobile should not be null")
+	private String mobile_no;
+	
+	@NotNull
+	@NotBlank(message="Gender  should not be null")
+	private String gender;
+	@NotNull
+	@NotBlank(message="Mobile  should not be null")
+	private Integer age;
+	
+	@NotNull
+	@NotBlank(message="Location  should not be null")
+	private String location;
+	
+	@NotNull
+	@NotBlank(message="Work Type should not be null")
+	private String work_type;
+	
+	@NotNull
+	@NotBlank(message="income should not be null")
+	private Integer income;
+	
+	@NotNull
+	@NotBlank(message="loan Amount should not be null")
+	private Integer loan_amount;
+	private Date date_of_birth;
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	@Column(name = "first_name", nullable = false)
+	public String getFirst_name() {
+		return first_name;
+	}
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+	@Column(name = "last_name", nullable = false)
+	public String getLast_name() {
+		return last_name;
+	}
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
+	}
+	@Column(name = "mobile_no", nullable = false)
+	public String getMobile_no() {
+		return mobile_no;
+	}
+	public void setMobile_no(String mobile_no) {
+		this.mobile_no = mobile_no;
+	}
+	@Column(name = "gender", nullable = false)
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	@Column(name = "age", nullable = false)
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	@Column(name = "location", nullable = false)
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	@Column(name = "work_type", nullable = false)
+	public String getWork_type() {
+		return work_type;
+	}
+	public void setWork_type(String work_type) {
+		this.work_type = work_type;
+	}
+	@Column(name = "income", nullable = false)
+	public Integer getIncome() {
+		return income;
+	}
+	public void setIncome(Integer income) {
+		this.income = income;
+	}
+	@Column(name = "loan_amount", nullable = false)
+	public Integer getLoan_amount() {
+		return loan_amount;
+	}
+	public void setLoan_amount(Integer loan_amount) {
+		this.loan_amount = loan_amount;
+	}
+	
+	@Column(name = "date_of_birth", nullable = false)
+	public Date getDate_of_birth() {
+		return date_of_birth;
+	}
+	public void setDate_of_birth(Date date_of_birth) {
+		this.date_of_birth = date_of_birth;
+	}
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", mobile_no="
+				+ mobile_no + ", gender=" + gender + ", age=" + age + ", location=" + location + ", work_type="
+				+ work_type + ", income=" + income + ", loan_amount=" + loan_amount + ", date_of_birth=" + date_of_birth
+				+ ", getId()=" + getId() + ", getFirst_name()=" + getFirst_name() + ", getLast_name()=" + getLast_name()
+				+ ", getMobile_no()=" + getMobile_no() + ", getGender()=" + getGender() + ", getAge()=" + getAge()
+				+ ", getLocation()=" + getLocation() + ", getWork_type()=" + getWork_type() + ", getIncome()="
+				+ getIncome() + ", getLoan_amount()=" + getLoan_amount() + ", getDate_of_birth()=" + getDate_of_birth()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
+	
+
+}

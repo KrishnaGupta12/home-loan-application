@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;HomeLoanApplication/src/main/java/com/lti/HomeLoanApplication/exception/CustomerException.java&apos; to &apos;CustomerNotFoundException.java&apos;" description="Rename resource &apos;CustomerException.java&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/java/com/lti/HomeLoanApplication/exception/CustomerException.java" name="CustomerNotFoundException.java" stamp="1653202967547" updateReferences="true"/>
+</session>

@@ -1,0 +1,42 @@
+package com.lti.HomeLoanApplication.Entity;
+
+
+
+
+import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
+@Entity
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
+
+@Table(name="customer")
+public class Customer {
+	
+	
+	private Integer id;
+	private String first_name;
+	private String last_name;
+	private String mobile_no;
+	private String gender;
+	private Integer age;
+	private String location;
+	private String work_type;
+	private Integer income;
+	private Integer loan_amount;
+	private Date date_of_birth;
+	
+	
+	
+
+}

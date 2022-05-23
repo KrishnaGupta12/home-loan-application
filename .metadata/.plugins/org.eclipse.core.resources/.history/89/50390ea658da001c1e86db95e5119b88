@@ -1,0 +1,100 @@
+package com.lti.HomeLoanApplication.service;
+
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.lti.HomeLoanApplication.Entity.Customer;
+import com.lti.HomeLoanApplication.Entity.Loan;
+import com.lti.HomeLoanApplication.repository.CustomerRespository;
+import com.lti.HomeLoanApplication.repository.LoanRespository;
+
+@Service
+public class LoanEligibilityCustomerService {
+	private double roi;
+	private double emiAmount;
+	private double roiPerMonth;
+	private int tenure;
+	SimpleDateFormat  dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
+	
+	@Autowired
+	LoanRespository loanRespository;
+	
+	@Autowired
+	CustomerRespository customerRespository;
+	
+	
+	public List<Customer> getEligibleCustomer() {
+		List<Customer> eligibleCustomer =new ArrayList<Customer>();
+				
+		List<Customer> customersList= customerRespository.findAll();
+		
+		for(Customer Customer:customersList) {
+			if(calculateAge(Customer.getDateOfBirth())>23) {
+				if(Customer.getEmployeementType().equals("salaried") && Customer.getIncome()>12000) {
+					eligibleCustomer.add(Customer);
+				}
+			}
+			
+		}
+		return eligibleCustomer;
+	}
+	
+	
+	public List<Loan> calculateEmiByEligibleCustomer() {
+		
+		List<Customer> customersList=getEligibleCustomer();
+		for(Customer customer:customersList) {
+			Loan loan=new Loan();
+			loan=	calculateEmi(customer);
+			loanRespository.save(loan);
+		}
+		return loanRespository.findAll();
+		
+	}
+	
+	
+	
+	public Loan calculateEmi(Customer customer) {
+		Loan loan=new Loan();
+		if(customer.getGender().equals("female")){
+			roi=10.20;
+			roiPerMonth=roi/(12*100);
+			tenure=10;
+			tenure=tenure*12;
+			emiAmount= (customer.getLoanValue()*roiPerMonth*Math.pow(1+roiPerMonth,tenure))/(Math.pow(1+roiPerMonth,tenure)-1);
+		}
+		else {
+			roi=10.25;
+			roiPerMonth=roi/(12*100);
+			tenure=10;
+			tenure=tenure*12;
+			emiAmount= (customer.getLoanValue()*roiPerMonth*Math.pow(1+roiPerMonth,tenure))/(Math.pow(1+roiPerMonth,tenure)-1);
+		}
+		loan.setCustomerId(customer.getId());
+		loan.setLoanAmount(customer.getLoanValue());
+		loan.setInterestRate(roi);
+		loan.setTenure(10);
+		loan.setEmiAmount(emiAmount);
+		
+		return loan;
+		
+	}
+	
+	public int calculateAge(Date dateOfBirth) {
+		String strDate = dateFormat.format(dateOfBirth);  
+		LocalDate dob = LocalDate.parse(strDate);  
+		LocalDate curDate = LocalDate.now();
+		return Period.between(dob, curDate).getYears();
+	}
+	
+	
+}

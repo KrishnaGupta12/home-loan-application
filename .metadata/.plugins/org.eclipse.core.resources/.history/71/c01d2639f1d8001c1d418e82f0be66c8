@@ -1,0 +1,17 @@
+package com.lti.HomeLoanApplication.Entity;
+
+
+
+
+public class Eligibility {
+	
+	private Integer id;
+	private Integer age;
+	private String employement_type;
+	private Integer income;
+	private String ctc;
+	
+	
+
+}
+ 

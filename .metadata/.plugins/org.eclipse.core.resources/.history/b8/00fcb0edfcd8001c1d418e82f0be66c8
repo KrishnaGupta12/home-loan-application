@@ -1,0 +1,18 @@
+package com.lti.HomeLoanApplication.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.lti.HomeLoanApplication.Entity.Customer;
+import com.lti.HomeLoanApplication.service.CustomerDetails;
+
+@Repository
+public interface CustomerRespository extends JpaRepository<Customer,Integer>{
+	
+	List<Customer> findAll();
+	CustomerDetails save(CustomerDetails cust);
+	Customer findById(int custId);
+
+}

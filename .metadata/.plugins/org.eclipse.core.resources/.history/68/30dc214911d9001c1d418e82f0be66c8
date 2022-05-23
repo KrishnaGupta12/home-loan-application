@@ -1,0 +1,17 @@
+package com.lti.HomeLoanApplication.customeException;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="Not Found")
+public class CustomerException extends Exception{
+	
+	private static final long serialVersionUID = -2581975292273282583L;
+	 
+	 String errorMessage; 
+	 String errorCode;
+	
+	public CustomerException(String errorMessage) {  
+	    super(errorMessage);  
+	 }  
+}

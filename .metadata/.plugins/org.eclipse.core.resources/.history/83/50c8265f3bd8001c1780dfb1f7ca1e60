@@ -1,0 +1,8 @@
+package com.lti.HomeLoanApplication.Entity;
+
+public class Snippet {
+	public static void main(String[] args) {
+		postgres
+	}
+}
+

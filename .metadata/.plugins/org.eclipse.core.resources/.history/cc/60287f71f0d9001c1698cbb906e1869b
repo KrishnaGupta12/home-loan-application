@@ -1,0 +1,92 @@
+package com.lti.HomeLoanApplication.service;
+
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.lti.HomeLoanApplication.Entity.Customer;
+import com.lti.HomeLoanApplication.Entity.Loan;
+import com.lti.HomeLoanApplication.repository.CustomerRespository;
+import com.lti.HomeLoanApplication.repository.LoanRespository;
+
+@Service
+public class LoanEligibilityCustomerService {
+	private double roi;
+	private double emiAmount;
+	private double roiPerMonth;
+	private int tenure;
+	
+	@Autowired
+	LoanRespository loanRespository;
+	
+	@Autowired
+	CustomerRespository customerRespository;
+	
+
+	/*
+	 * public List<Customer> getEligibleCustomer() { 
+	 * 
+	 * 		return customerRespository.findAll(); 
+	 * }
+	 */
+	
+	public List<Customer> getEligibleCustomer() {
+		List<Customer> eligibleCustomer =new ArrayList<Customer>();
+				
+		List<Customer> customersList= customerRespository.findAll();
+		
+		for(Customer Customer:customersList) {
+			
+			if(Customer.getEmployeementType().equals("salaried") && Customer.getIncome()>12000) {
+				eligibleCustomer.add(Customer);
+			}
+		}
+		return eligibleCustomer;
+	}
+	
+
+	public void calculateEmiByEligibleCustomer() {
+		Loan loan=new Loan();
+		List<Customer> customersList=getEligibleCustomer();
+		List<Loan> customerLoanLlist=new ArrayList<Loan>();
+		for(Customer customer:customersList) {
+			//calculateEmi(customer.getLoanValue(),customer.getGender());
+			loan.setLoanAmount(customer.getLoanValue());
+			loan.setInterestRate(10.25);
+			loan.setTenure(10);
+			loan.setEmiAmount(1335);
+			loanRespository.save(loan);
+			customerLoanLlist.add(loan);
+		}
+		
+	}
+	
+	
+	
+	public void calculateEmi(Integer loanAmount,String gender) {
+		if(gender.equals("female")) {
+			roi=10.20;
+			roiPerMonth=roi/(12*100);
+			tenure=10;
+			tenure=tenure*12;
+			emiAmount= (100000*roiPerMonth*Math.pow(1+roiPerMonth,tenure))/(Math.pow(1+roiPerMonth,tenure)-1);
+		}
+		else {
+			roi=10.25;
+			roiPerMonth=roi/(12*100);
+			tenure=10;
+			tenure=tenure*12;
+			emiAmount= (100000*roiPerMonth*Math.pow(1+roiPerMonth,tenure))/(Math.pow(1+roiPerMonth,tenure)-1);
+		}
+		
+		//return emiAmount;
+		
+	}
+	
+	
+}

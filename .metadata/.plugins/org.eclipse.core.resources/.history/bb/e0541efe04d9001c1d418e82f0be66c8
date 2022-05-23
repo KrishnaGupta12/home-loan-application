@@ -1,0 +1,7 @@
+package com.lti.HomeLoanApplication.customeException;
+
+public class CustomerException extends Exception{
+	public CustomerException(String errorMessage) {  
+	    super(errorMessage);  
+	 }  
+}

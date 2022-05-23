@@ -1,0 +1,5 @@
+
+sever.port=8089
+spring.datasource.url= jdbc:postgresql://localhost:5432/WorkDb
+spring.datasource.username= demodb
+spring.datasource.password= demodb

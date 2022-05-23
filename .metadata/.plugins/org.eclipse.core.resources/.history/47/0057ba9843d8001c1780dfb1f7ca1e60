@@ -1,0 +1,5 @@
+package com.lti.HomeLoanApplication.repository;
+
+public interface CustomerRespository {
+
+}

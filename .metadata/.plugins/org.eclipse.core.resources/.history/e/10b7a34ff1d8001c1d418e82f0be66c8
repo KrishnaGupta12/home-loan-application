@@ -1,0 +1,55 @@
+package com.lti.HomeLoanApplication.Entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="loaneligibility")
+public class Eligibility {
+	
+	private Integer id;
+	private Integer age;
+	private String employement_type;
+	private Integer income;
+	private String ctc;
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public String getEmployement_type() {
+		return employement_type;
+	}
+	public void setEmployement_type(String employement_type) {
+		this.employement_type = employement_type;
+	}
+	public Integer getIncome() {
+		return income;
+	}
+	public void setIncome(Integer income) {
+		this.income = income;
+	}
+	public String getCtc() {
+		return ctc;
+	}
+	public void setCtc(String ctc) {
+		this.ctc = ctc;
+	}
+	@Override
+	public String toString() {
+		return "Eligibility [id=" + id + ", age=" + age + ", employement_type=" + employement_type + ", income="
+				+ income + ", ctc=" + ctc + "]";
+	}
+	
+	
+
+}
+ 

@@ -1,0 +1,25 @@
+package com.lti.HomeLoanApplication.dao;
+
+import java.sql.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CustomerRequest {
+	
+	private String first_name;
+	private String last_name;
+	private String mobile_no;
+	private String gender;
+	private Integer age;
+	private String location;
+	private String work_type;
+	private Integer income;
+	private Integer loan_amount;
+	private Date date_of_birth;
+
+}

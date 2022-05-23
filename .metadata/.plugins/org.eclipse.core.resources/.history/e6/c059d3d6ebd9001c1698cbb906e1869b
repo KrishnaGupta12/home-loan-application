@@ -1,0 +1,12 @@
+package com.lti.HomeLoanApplication.Entity;
+
+public class Loan {
+	
+	private long loanAmount;
+	private int tenure;
+	private double interestRate;
+	private long emiAmount;
+	
+	
+
+}

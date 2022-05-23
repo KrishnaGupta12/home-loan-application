@@ -1,0 +1,5 @@
+package com.lti.HomeLoanApplication.dao;
+
+public class CustomerRequest {
+
+}

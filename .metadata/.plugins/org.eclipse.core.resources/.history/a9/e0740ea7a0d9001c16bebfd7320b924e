@@ -1,0 +1,64 @@
+package com.lti.HomeLoanApplication.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.lti.HomeLoanApplication.Entity.Customer;
+import com.lti.HomeLoanApplication.dao.CustomerRequest;
+import com.lti.HomeLoanApplication.exception.CustomerNotFoundException;
+import com.lti.HomeLoanApplication.repository.CustomerRespository;
+
+@Service
+public class CustomerService {
+
+	@Autowired
+	CustomerRespository customerRespository;
+
+	/*
+	 * public List<Customer> getCustomer(){ return customerRespository.findAll();
+	 * 
+	 * }
+	 * 
+	 * public Customer saveCustomer(Customer CustomerDt) { return
+	 * customerRespository.save(CustomerDt); }
+	 */
+
+	public Customer saveCustomer(CustomerRequest customerRequest) {
+
+		Customer customer = new Customer();
+		customer.setFirst_name(customerRequest.getFirst_name());
+		customer.setLast_name(customerRequest.getLast_name());
+		customer.setAge(customerRequest.getAge());
+		customer.setGender(customerRequest.getGender());
+		customer.setIncome(customerRequest.getIncome());
+		customer.setLoan_amount(customerRequest.getLoan_amount());
+		customer.setLocation(customerRequest.getLocation());
+		customer.setMobile_no(customerRequest.getMobile_no());
+		customer.setWork_type(customerRequest.getWork_type());
+		customer.setDate_of_birth(customerRequest.getDate_of_birth());
+
+		return customerRespository.save(customer);
+
+	}
+
+	public List<Customer> getAllCustomer() {
+		return customerRespository.findAll();
+	}
+
+	public Customer getCustomer(Integer id) {
+
+		Customer customer = customerRespository.findById(id).get();
+		/*
+		 * System.out.println("customer=="+customer); if (customer != null) { return
+		 * customer; } else { throw new
+		 * CustomerNotFoundException("Customer not found with given id " + id); }
+		 */
+		
+		return customerRespository.findById(id).get();
+
+	}
+
+}

@@ -1,0 +1,26 @@
+package com.lti.HomeLoanApplication.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.lti.HomeLoanApplication.Entity.Customer;
+import com.lti.HomeLoanApplication.repository.CustomerRespository;
+
+@Service
+public class CustomerService {
+	
+	@Autowired
+	CustomerRespository customerRespository;
+	
+	public List<Customer> getCustomer(){
+		return customerRespository.findAll();
+		
+	}
+	
+	public CustomerDetails saveCustomer(CustomerDetails CustomerDt) {
+		return customerRespository.save(CustomerDt);
+	}
+
+}

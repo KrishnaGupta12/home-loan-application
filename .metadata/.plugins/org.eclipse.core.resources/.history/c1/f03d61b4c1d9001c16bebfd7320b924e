@@ -1,0 +1,30 @@
+package com.lti.HomeLoanApplication.dao;
+
+import java.sql.Date;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+//@Data
+//@AllArgsConstructor(staticName ="build")
+//@NoArgsConstructor
+public class CustomerRequest {
+	private Integer id;
+	private String name;
+	private String emailId;
+	private String mobileNo;
+	private String gender;
+	private Date dateOfBirth;
+	private String location;
+	private String employeementType;
+	private Integer income;
+	private Integer loanValue;
+	
+
+}

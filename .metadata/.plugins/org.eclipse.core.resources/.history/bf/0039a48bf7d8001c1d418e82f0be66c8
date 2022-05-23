@@ -1,0 +1,20 @@
+package com.lti.HomeLoanApplication.service;
+
+import java.sql.Date;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class CustomerDetails {
+	private String firstName;
+	private String lastName;
+	private String mobileNo;
+	private String emailAddress;
+	private Date dateOfBirth;
+	private String employeementType;
+	private String location;
+	private boolean isInsuranceApplicable;
+	private Long loanValue;
+	private Long monthlyIncome;
+
+}

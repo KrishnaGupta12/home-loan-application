@@ -1,0 +1,5 @@
+package com.lti.HomeLoanApplication.exception;
+
+public class ApplicationExceptionHandler {
+
+}

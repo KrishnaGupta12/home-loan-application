@@ -1,0 +1,6 @@
+package com.lti.HomeLoanApplication.repository;
+
+@Repository
+public interface CustomerRespository JpaRepository<Customer,int>{
+
+}

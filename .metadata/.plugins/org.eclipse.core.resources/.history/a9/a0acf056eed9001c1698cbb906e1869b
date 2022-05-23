@@ -1,0 +1,48 @@
+package com.lti.HomeLoanApplication.Entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name ="customer")
+public class Loan {
+	
+	private Integer id;
+	private long loanAmount;
+	private int tenure;
+	private double interestRate;
+	private long emiAmount;
+
+	public long getLoanAmount() {
+		return loanAmount;
+	}
+
+	public void setLoanAmount(long loanAmount) {
+		this.loanAmount = loanAmount;
+	}
+
+	public int getTenure() {
+		return tenure;
+	}
+
+	public void setTenure(int tenure) {
+		this.tenure = tenure;
+	}
+
+	public double getInterestRate() {
+		return interestRate;
+	}
+
+	public void setInterestRate(double interestRate) {
+		this.interestRate = interestRate;
+	}
+
+	public long getEmiAmount() {
+		return emiAmount;
+	}
+
+	public void setEmiAmount(long emiAmount) {
+		this.emiAmount = emiAmount;
+	}
+
+}

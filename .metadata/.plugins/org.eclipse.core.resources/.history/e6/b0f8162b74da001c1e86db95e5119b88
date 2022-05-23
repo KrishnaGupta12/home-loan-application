@@ -1,0 +1,144 @@
+package com.lti.HomeLoanApplication.service;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.lti.HomeLoanApplication.Entity.Customer;
+import com.lti.HomeLoanApplication.Entity.Loan;
+import com.lti.HomeLoanApplication.repository.CustomerRespository;
+import com.lti.HomeLoanApplication.repository.LoanRespository;
+
+@Service
+public class LoanEligibilityCustomerService {
+	private double loanAmount;
+	private double rateOfInterest;
+	private int tenure;
+	private double emiAmount;
+	
+	
+	SimpleDateFormat  dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
+	
+	@Autowired
+	LoanRespository loanRespository;
+	
+	@Autowired
+	CustomerRespository customerRespository;
+	
+	
+	public List<Customer> getEligibleCustomer() {
+		List<Customer> eligibleCustomer =new ArrayList<Customer>();
+				
+		List<Customer> customersList= customerRespository.findAll();
+		
+		for(Customer customer:customersList) {
+			if(customer.getAge()>=21 && (customer.getResident().equals("NRI")||customer.getResident().equals("India") )) {
+				if(customer.getEmployeementType().equals("salaried") && customer.getIncome()>20000) {
+					eligibleCustomer.add(customer);
+				}
+			}
+			
+		}
+		return eligibleCustomer;
+	}
+	
+	
+	public List<Loan> calculateEmiByEligibleCustomer() {
+		
+		List<Customer> customersList=getEligibleCustomer();
+		for(Customer customer:customersList) {
+			Loan loan=new Loan();
+			loan=	calculateEmi(customer);
+			loanRespository.save(loan);
+		}
+		return loanRespository.findAll();
+		
+	}
+	
+	
+	
+	public Loan calculateEmi(Customer customer) {
+		Loan loan=new Loan();
+		loanAmount=customer.getLoanValue().doubleValue();
+		if(customer.getGender().equals("female") && customer.getCo_owner().equals("yes") && customer.getResident().equals("India")){
+			/*roi=6.10;
+			interestPerMonth=roi/(12*100);
+			tenure=10;
+			tenure=tenure*12;
+			emiAmount= (customer.getLoanValue()*interestPerMonth*Math.pow(1+interestPerMonth,tenure))/(Math.pow(1+interestPerMonth,tenure)-1);
+			*/
+			rateOfInterest=6.10;
+			tenure=10;
+			emiAmount=loanAmount*rateOfInterest*(Math.pow(1+rateOfInterest,tenure)/(Math.pow(1+rateOfInterest,tenure)-1));
+			loan.setInterestRate(rateOfInterest);
+		}
+		if(customer.getGender().equals("female") && customer.getCo_owner().equals("no") && customer.getResident().equals("India")){
+			/*roi=6.45;
+			interestPerMonth=roi/(12*100);
+			tenure=10;
+			tenure=tenure*12;
+			emiAmount= (customer.getLoanValue()*interestPerMonth*Math.pow(1+interestPerMonth,tenure))/(Math.pow(1+interestPerMonth,tenure)-1);
+			*/
+			rateOfInterest=6.45;
+			tenure=10;
+			emiAmount=loanAmount*rateOfInterest*(Math.pow(1+rateOfInterest,tenure)/(Math.pow(1+rateOfInterest,tenure)-1));
+			loan.setInterestRate(rateOfInterest);
+		}
+		if(customer.getGender().equals("male") && customer.getCo_owner().equals("yes") && customer.getResident().equals("India")){
+			/*roi=7.15;
+			interestPerMonth=roi/(12*100);
+			tenure=10;
+			tenure=tenure*12;
+			emiAmount= (customer.getLoanValue()*interestPerMonth*Math.pow(1+interestPerMonth,tenure))/(Math.pow(1+interestPerMonth,tenure)-1);
+			*/
+			rateOfInterest=7.15;
+			tenure=10;
+			emiAmount=loanAmount*rateOfInterest*(Math.pow(1+rateOfInterest,tenure)/(Math.pow(1+rateOfInterest,tenure)-1));
+			loan.setInterestRate(rateOfInterest);
+		}
+		
+		if(customer.getGender().equals("male") && customer.getCo_owner().equals("no") && customer.getResident().equals("India")){
+			/*
+			 * roi=7.25; interestPerMonth=roi/(12*100); tenure=10; tenure=tenure*12;
+			 * emiAmount=
+			 * (customer.getLoanValue()*interestPerMonth*Math.pow(1+interestPerMonth,tenure)
+			 * )/(Math.pow(1+interestPerMonth,tenure)-1);
+			 */
+			
+			rateOfInterest=7.25;
+			tenure=10;
+			emiAmount=loanAmount*rateOfInterest*(Math.pow(1+rateOfInterest,tenure)/(Math.pow(1+rateOfInterest,tenure)-1));
+			loan.setInterestRate(rateOfInterest);
+		
+		}
+		loan.setCustomerId(customer.getId());
+		loan.setLoanAmount(customer.getLoanValue());
+		
+		loan.setTenure(tenure);
+		loan.setEmiAmount(emiAmount);
+		
+		/*
+		 * loan.setCustomerId(customer.getId());
+		 * loan.setLoanAmount(customer.getLoanValue()); loan.setInterestRate(7.25);
+		 * loan.setTenure(10); loan.setEmiAmount(1335);
+		 */
+		
+		return loan;
+		
+	}
+	
+	public int calculateAge(Date dateOfBirth) {
+		String strDate = dateFormat.format(dateOfBirth);  
+		LocalDate dob = LocalDate.parse(strDate);  
+		LocalDate curDate = LocalDate.now();
+		return Period.between(dob, curDate).getYears();
+	}
+	
+	
+}

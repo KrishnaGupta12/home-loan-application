@@ -1,0 +1,68 @@
+package com.lti.HomeLoanApplication.service;
+
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.lti.HomeLoanApplication.Entity.Customer;
+import com.lti.HomeLoanApplication.repository.CustomerRespository;
+
+@Service
+public class LoanEligibilityCustomerService {
+	private double roi;
+	private double emiAmount;
+	private double roiPerMonth;
+	private int tenure;
+	
+	@Autowired
+	CustomerRespository customerRespository;
+
+	/*
+	 * public List<Customer> getEligibleCustomer() { 
+	 * 
+	 * 		return customerRespository.findAll(); 
+	 * }
+	 */
+	
+	public List<Customer> getEligibleCustomer() {
+		List<Customer> eligibleCustomer =new ArrayList<Customer>();
+				
+		List<Customer> customersList= customerRespository.findAll();
+		
+		for(Customer Customer:customersList) {
+			
+			if(Customer.getEmployeementType().equals("salaried") && Customer.getIncome()>12000) {
+				eligibleCustomer.add(Customer);
+			}
+		}
+		return eligibleCustomer;
+	}
+	
+
+	public void calculateEmiByEligibleCustomer() {
+		List<Customer> customersList=getEligibleCustomer();
+		
+		for(Customer customer:customersList) {
+			
+			
+			
+		}
+		
+		
+		
+	}
+	
+	public void calculateEmi() {
+		roi=10.25;
+		roiPerMonth=roi/(12*100);
+		emiAmount= (100000*roiPerMonth*Math.pow(1+roiPerMonth,time))/(Math.pow(1+roiPerMonth,time)-1);
+		
+	}
+	
+	
+}

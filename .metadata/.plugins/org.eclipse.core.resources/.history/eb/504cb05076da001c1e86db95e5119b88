@@ -1,0 +1,100 @@
+package com.lti.HomeLoanApplication.service;
+
+import java.sql.Date;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class CustomerDetails {
+	private String firstName;
+	private String lastName;
+	private String mobileNo;
+	private String emailAddress;
+	private Date dateOfBirth;
+	private String employeementType;
+	private String location;
+	private boolean isInsuranceApplicable;
+	private Long loanValue;
+	private Long monthlyIncome;
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getMobileNo() {
+		return mobileNo;
+	}
+
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getEmployeementType() {
+		return employeementType;
+	}
+
+	public void setEmployeementType(String employeementType) {
+		this.employeementType = employeementType;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public boolean isInsuranceApplicable() {
+		return isInsuranceApplicable;
+	}
+
+	public void setInsuranceApplicable(boolean isInsuranceApplicable) {
+		this.isInsuranceApplicable = isInsuranceApplicable;
+	}
+
+	public Long getLoanValue() {
+		return loanValue;
+	}
+
+	public void setLoanValue(Long loanValue) {
+		this.loanValue = loanValue;
+	}
+
+	public Long getMonthlyIncome() {
+		return monthlyIncome;
+	}
+
+	public void setMonthlyIncome(Long monthlyIncome) {
+		this.monthlyIncome = monthlyIncome;
+	}
+
+}
