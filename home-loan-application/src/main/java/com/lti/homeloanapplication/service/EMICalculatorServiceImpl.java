@@ -21,6 +21,11 @@ public class EMICalculatorServiceImpl implements EMICalculatorService {
 	@Override
 	public LoanInfo calculateInterestRate(LoanInfo loanInfo) {
 		
+		if(loanInfo.getCreditScore() <=300)
+			loanInfo.setInterestRate(0);
+		else
+		{
+		
 		
 		String query =" select * from public.\"InterestRates\" ";
 		List<Map<String,Object>> list=jdbcTemplate.queryForList(query);
@@ -32,7 +37,8 @@ public class EMICalculatorServiceImpl implements EMICalculatorService {
 			int credit_max= (int) map.get("Credit_Max");
 			
 			
-			if(creditScore > credit_min  && creditScore < credit_max)
+			
+			if(creditScore >= credit_min  && creditScore <= credit_max)
 			{
 				if(loanInfo.getSalariedOrSelfEmployed())
 				{
@@ -44,75 +50,21 @@ public class EMICalculatorServiceImpl implements EMICalculatorService {
 					loanInfo.setInterestRate((double) map.get("InterestRateForSelfEmployed"));
 					//System.out.println((double) map.get("InterestRateForSelfEmployed"));
 				}
-									 
-									 
-								 
-				
-			}
-				
-			
+			}	
 		}
-
-
-		 
-		
-//			System.out.println("Inside Service layer");
-//			
-//			int creditScore1 =loanInfo.getCreditScore();
-//			
-//			if(loanInfo.getSalariedOrSelfEmployed())
-//			{
-//				if(creditScore1 <701)
-//					loanInfo.setInterestRate(8.10);
-//				else if(creditScore1>701 && creditScore1<726)
-//					loanInfo.setInterestRate(7.10);
-//				else if(creditScore1>726 && creditScore1<751)
-//					loanInfo.setInterestRate(7.00);
-//				else if(creditScore1>751 && creditScore1<771)
-//					loanInfo.setInterestRate(6.85);
-//				else if(creditScore1>771 && creditScore1<800)
-//					loanInfo.setInterestRate(6.75);
-//				else if(creditScore1>800)
-//					loanInfo.setInterestRate(6.75);
-//				
-//				
-//			}
-//			else
-//			{
-//				if(creditScore1 <701)
-//					loanInfo.setInterestRate(8.20);
-//				else if(creditScore1>701 && creditScore1<726)
-//					loanInfo.setInterestRate(7.20);
-//				else if(creditScore1>726 && creditScore1<751)
-//					loanInfo.setInterestRate(7.10);
-//				else if(creditScore1>751 && creditScore1<771)
-//					loanInfo.setInterestRate(6.95);
-//				else if(creditScore1>771 && creditScore1<800)
-//					loanInfo.setInterestRate(6.85);
-//				else if(creditScore1>800)
-//					loanInfo.setInterestRate(6.85);
-//				
-//			}
-			return loanInfo;
-			
-		
+		}
+		return loanInfo;
 	}
 
+	
 	@Override
 	public LoanInfo calculateEMI(LoanInfo loanInfo) {
-		// TODO Auto-generated method stub
-		long P=loanInfo.getLoanAmount();// P is Loan amount
-		double R=loanInfo.getInterestRate();// R is rate of interest
-		double N=loanInfo.getTenureInYears() * 12; //N is Tenure in months
 		
-		R=R/12/100;//monthly interest
+		long P=loanInfo.getLoanAmount();          // P is Loan amount
+		double R=loanInfo.getInterestRate();	  // R is rate of interest
+		double N=loanInfo.getTenureInYears() * 12;//N is Tenure in months
 		
-//		System.out.println("Loan amount: "+P);
-//		System.out.println("Interest rate: "+R);
-//		System.out.println("Loan tenure: "+N);
-//		
-//		
-		
+		R=R/12/100;								  //monthly interest Rate
 		
 		long EMI = (long) ((P*R*Math.pow(1+R,N))/(Math.pow(1+R,N) -1));
 		loanInfo.setEMI(EMI);

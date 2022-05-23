@@ -10,14 +10,20 @@ import { LoanInfo } from '../loan-info';
 export class IntRateCalcComponent implements OnInit {
 
   info:any;
-  constructor(private service:IRCService ) { }
+
+  
+  constructor(private service:IRCService ) { 
+    
+  }
   
 
   ngOnInit(): void {
     
     }
-
+    amount:number=0;
+    tenure:number=0;
     bool =true;
+    isValidFormSubmitted = false;
 
 
     flag=false;
@@ -25,6 +31,11 @@ export class IntRateCalcComponent implements OnInit {
 
     calculate(loanInfo:any)
     {
+      this.isValidFormSubmitted = false;
+     if (loanInfo.invalid) {
+        return;
+     }
+     this.isValidFormSubmitted = true;
       
       this.info=loanInfo.value;
 
@@ -36,7 +47,16 @@ export class IntRateCalcComponent implements OnInit {
         (data)=>{
           console.log(data);
           this.info = data;
-          this.flag=true;
+          if(this.info.creditScore <301)
+          {
+            alert("You are not eligible for loan! as your credit score is poor.")
+            
+            
+          }
+          else{
+            this.flag=true;
+          }
+          
         },
         (error)=>{
           console.log("Error **********************************")

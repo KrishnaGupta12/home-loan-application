@@ -1,5 +1,5 @@
 <body>
-  
+
 <div class="container">
     <div class="calculator-form">
       <h1 class="title">Interest Rate Calculator</h1>
@@ -10,21 +10,22 @@
           
         <div class="input-field">
           <label for="loanAmount"></label>
-           <h4>Loan Amount:<input type="number" placeholder="in Rs" class="form-control" name="loanAmount" ngModel required></h4>
-        </div>
+           <h4>Loan Amount:<input type="number" placeholder="in Rs" class="form-control" id="loanAmount" name="loanAmount" min="100000" max="20000000" required ngModel></h4>
+          
+          </div>
     
         <div class="input-field">
           <label for="tenureInYears"></label> 
-         <h4>Tenure:<input type="number" placeholder="in years" class="form-control" name="tenureInYears" ngModel required></h4> 
-  
-      </div>
+         <h4>Tenure:<input type="number" placeholder="in years" class="form-control" name="tenureInYears"   min="1" max="50" ngModel required ></h4> 
+         
+        </div>
      
 
 
      
           <div class="input-field">
             <label for="creditScore"></label>
-             <h4>Credit Score:<input type="number" placeholder="0" class="form-control" name="creditScore" ngModel required></h4>
+             <h4>Credit Score:<input type="number" placeholder="0" class="form-control" name="creditScore" min="300" max="1000" ngModel required></h4>
           </div>
           
           
@@ -47,21 +48,21 @@
         
         </form>
       
-
-        <div class="output" *ngIf="flag">
-          <table>
+<br>
+        <div class="output" *ngIf="flag" >
+         
             <tr>
-              <td><h3>Interest Rate:</h3></td>
-              <td><h3>{{info.interestRate}} %</h3></td>
+              <td><h4>Interest Rate:</h4></td>
+              <td><h4>{{info.interestRate}} %</h4></td>
              
           </tr>
 
           <tr>
-            <td><h3>EMI:</h3></td>
-            <td><h3>{{info.emi}} Rs</h3></td>
+            <td><h4>   EMI:</h4></td>
+            <td><h4>   {{info.emi}} Rs</h4></td>
              
           </tr>
-          </table>
+         
         </div>
       </div>
     </div>

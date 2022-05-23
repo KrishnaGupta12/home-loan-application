@@ -64,6 +64,12 @@ a{
     justify-content:space-between;
     font-size:.9rem;
   }
+  td {
+    border:0.9px solid black;
+    width:75%
+    
+  }
+
   input[type="checkbox"]{
     background:transparent;
     padding:1rem;
