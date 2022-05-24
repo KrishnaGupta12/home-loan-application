@@ -38,7 +38,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductByType(String productType) {
         Product product=productRepository.findByProductType(productType);
-        List<EmiOffer> emiOffers=emiOfferRepository.findAll().stream().filter(emiOffer -> emiOffer.getEmiType().equalsIgnoreCase(product.getEmiType())).collect(Collectors.toList());
+        List<EmiOffer> emiOffers=emiOfferRepository.findAll().stream().filter(emiOffer -> emiOffer.getEmiType()
+                .equalsIgnoreCase(product.getEmiType())).collect(Collectors.toList());
         product.setEmiOffers(emiOffers);
         return product;
     }
