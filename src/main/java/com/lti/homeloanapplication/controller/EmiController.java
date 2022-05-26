@@ -23,6 +23,7 @@ public class EmiController {
     }
     @GetMapping("/emi")
     public List<EmiOffer> getAllEmiOffer(){
+
         return emiService.getAllEmiOffer();
     }
 

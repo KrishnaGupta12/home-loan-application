@@ -1,14 +1,16 @@
 package com.lti.homeloanapplication.controller;
 
-import com.lti.homeloanapplication.entity.EmiOffer;
 import com.lti.homeloanapplication.entity.Product;
+import com.lti.homeloanapplication.exception.ProductAlReadyExistedException;
+import com.lti.homeloanapplication.exception.ProductNotFoundException;
 import com.lti.homeloanapplication.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.hibernate.tool.schema.SchemaToolingLogging.LOGGER;
@@ -21,21 +23,23 @@ public class ProductController {
     ProductService productService;
 
     @PostMapping("/productDetails")
-    public Product addProduct(@RequestBody Product product){
+    @ResponseBody
+    public ResponseEntity addProduct(@RequestBody Product product) throws SQLException, ProductAlReadyExistedException {
         LOGGER.info("Inside saveProductDetails of ProductController");
-       return productService.addProduct(product);
+        Product addProduct = productService.addProduct(product);
+        return new ResponseEntity<>(addProduct, HttpStatus.CREATED);
     }
 
     @GetMapping("/products")
-    public List<Product> getAllProducts(){
+    public ResponseEntity <List> getAllProducts()throws ProductNotFoundException{
         LOGGER.info("Inside getAllProducts List of ProductController");
-        return productService.getAllProducts();
+        return new ResponseEntity<List>((List) productService.getAllProducts(),HttpStatus.OK);
     }
 
     @GetMapping("/products_type/{type}")
-    public Product getProductByType(@PathVariable ("type") String productType){
+    public ResponseEntity getProductByType(@PathVariable ("type") String productType)throws ProductNotFoundException {
         LOGGER.info("Inside getProductByType List of ProductController");
-        return productService.getProductByType(productType);
+        return new ResponseEntity(productService.getProductByType(productType),HttpStatus.OK);
     }
 
 }

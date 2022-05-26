@@ -2,6 +2,8 @@ package com.lti.homeloanapplication.service;
 
 import com.lti.homeloanapplication.entity.EmiOffer;
 import com.lti.homeloanapplication.entity.Product;
+import com.lti.homeloanapplication.exception.ProductAlReadyExistedException;
+import com.lti.homeloanapplication.exception.ProductNotFoundException;
 import com.lti.homeloanapplication.repository.EmiOfferRepository;
 import com.lti.homeloanapplication.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,10 @@ import java.util.stream.Collectors;
 @Service
 public class ProductServiceImpl implements ProductService {
 
+    @Autowired
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
     @Autowired
     ProductRepository productRepository;
 
@@ -32,15 +38,28 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public Product addProduct(Product product){
-       return productRepository.save(product);
+       if(productRepository.existsById(product.getProductId())){
+           throw new ProductAlReadyExistedException();
+       }
+       Product addProduct = productRepository.save(product);
+        return addProduct;
     }
 
     @Override
-    public Product getProductByType(String productType) {
-        Product product=productRepository.findByProductType(productType);
-        List<EmiOffer> emiOffers=emiOfferRepository.findAll().stream().filter(emiOffer -> emiOffer.getEmiType()
-                .equalsIgnoreCase(product.getEmiType())).collect(Collectors.toList());
-        product.setEmiOffers(emiOffers);
+    public Product getProductByType(String productType)throws ProductNotFoundException {
+        Product product;
+
+        if(null!=productType && !productType.isEmpty() && null!=productRepository.findByProductType(productType)){
+             product = productRepository.findByProductType(productType);
+            List<EmiOffer> emiOffers=emiOfferRepository.findAll().stream().filter(emiOffer -> emiOffer.getEmiType()
+                    .equalsIgnoreCase(product.getEmiType())).collect(Collectors.toList());
+            product.setEmiOffers(emiOffers);
+        }else {
+            throw new ProductNotFoundException();
+
+        }
         return product;
     }
+
+
 }
