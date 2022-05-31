@@ -1,13 +1,15 @@
 package com.lti.homeloanapplication.service;
 
 import com.lti.homeloanapplication.entity.EmiOffer;
-import com.lti.homeloanapplication.entity.Product;
 import com.lti.homeloanapplication.repository.EmiOfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author EmiOffer Implementation with EmiService interface
+ */
 @Service
 public class EmiServiceImpl implements EmiService{
 

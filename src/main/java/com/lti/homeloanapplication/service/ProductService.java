@@ -3,17 +3,15 @@ package com.lti.homeloanapplication.service;
 import com.lti.homeloanapplication.entity.Product;
 import com.lti.homeloanapplication.exception.ProductAlReadyExistedException;
 import com.lti.homeloanapplication.exception.ProductNotFoundException;
-import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 
 public interface ProductService {
-    List<Product> getAllProducts()throws ProductNotFoundException;
+    List<Product> viewAllProducts()throws ProductNotFoundException;
 
-    public Product addProduct(Product product)throws ProductAlReadyExistedException;
+    public Product saveProductDetails(Product product)throws ProductAlReadyExistedException, SQLException;
 
-    Product getProductByType(String productType)throws ProductNotFoundException;
+    Product viewProductByType(String productType)throws ProductNotFoundException;
 }

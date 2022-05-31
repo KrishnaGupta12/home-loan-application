@@ -1,7 +1,7 @@
 package com.lti.homeloanapplication.service;
 
 import com.lti.homeloanapplication.entity.EmiOffer;
-import com.lti.homeloanapplication.entity.Product;
+
 import com.lti.homeloanapplication.exception.EmiOfferAlReadyExistedException;
 import com.lti.homeloanapplication.exception.EmiOfferNotFoundException;
 
